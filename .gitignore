@@ -87,3 +87,6 @@ Tuist/.build
 
 ### Claude MD ###
 CLAUDE.md
+
+### Build Output ###
+.build/
