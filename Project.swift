@@ -39,7 +39,9 @@ let project = Project(
             ),
             sources: ["LivithDesignSystem/Sources/**"],
             resources: ["LivithDesignSystem/Resources/**"],
-            dependencies: []
+            dependencies: [
+                .external(name: "Kingfisher")
+            ]
         ),
 
         // MARK: - LivithStorybook App
