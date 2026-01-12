@@ -36,6 +36,17 @@ if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
     fi
 fi
 
+# 워킹 디렉터리 변경 사항 확인
+if ! git diff-index --quiet HEAD --; then
+    echo "⚠️  커밋되지 않은 변경 사항이 있습니다."
+    git status -sb
+    read -p "이 상태에서 태그를 생성할까요? (y/N): " DIRTY_CONFIRM
+    if [ "$DIRTY_CONFIRM" != "y" ] && [ "$DIRTY_CONFIRM" != "Y" ]; then
+        echo "   태그 생성이 취소되었습니다."
+        exit 1
+    fi
+fi
+
 # 태그 생성
 git tag -a "$TAG_NAME" -m "Release $VERSION"
 echo "✅ 태그 '$TAG_NAME' 생성 완료"

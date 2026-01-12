@@ -63,8 +63,9 @@ if [ "$CONFIRM" != "y" ] && [ "$CONFIRM" != "Y" ]; then
     exit 0
 fi
 
-# 버전 파일 업데이트
-sed -i '' "s/version = \"$CURRENT_VERSION\"/version = \"$NEW_VERSION\"/" "$VERSION_FILE"
+# 버전 파일 업데이트 (macOS/Linux 호환)
+sed -i.bak "s/version = \"$CURRENT_VERSION\"/version = \"$NEW_VERSION\"/" "$VERSION_FILE"
+rm -f "$VERSION_FILE.bak"
 echo "✅ 버전 파일 업데이트 완료"
 
 # 커밋 여부 확인
