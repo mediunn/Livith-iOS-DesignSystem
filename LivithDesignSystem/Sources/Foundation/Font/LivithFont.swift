@@ -29,13 +29,13 @@ public extension Font {
         var fontName: String {
             switch self {
             case .title, .caption1Bold:
-                return LivithDesignSystemFontFamily.NotoSansKR.bold.name
+                return "NotoSansKR-Bold"
             case .headSemibold, .body1Semibold, .body2Semibold, .body3Semibold, .body4Semibold, .caption1Semibold, .caption2Semibold:
-                return LivithDesignSystemFontFamily.NotoSansKR.semiBold.name
+                return "NotoSansKR-SemiBold"
             case .headMedium, .body2Medium, .body3Medium, .body4Medium:
-                return LivithDesignSystemFontFamily.NotoSansKR.medium.name
+                return "NotoSansKR-Medium"
             default:
-                return LivithDesignSystemFontFamily.NotoSansKR.regular.name
+                return "NotoSansKR-Regular"
             }
         }
 
@@ -83,12 +83,23 @@ public extension Font {
     }
 
     static func registerFont() {
-        guard let bundle = Bundle(identifier: "com.livith.designsystem") else { return }
+        let fontNames = [
+            "NotoSansKR-Bold",
+            "NotoSansKR-SemiBold",
+            "NotoSansKR-Medium",
+            "NotoSansKR-Regular"
+        ]
 
-        for font in LivithDesignSystemFontFamily.NotoSansKR.all {
-            guard let url = bundle.url(forResource: font.name, withExtension: "ttf"),
-                  CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil) else {
-                return
+        let bundle = Bundle.livithDesignSystem
+
+        for fontName in fontNames {
+            guard let url = bundle.url(forResource: fontName, withExtension: "ttf") else {
+                print("[LivithDesignSystem] 폰트 파일을 찾을 수 없습니다: \(fontName).ttf")
+                continue
+            }
+
+            if !CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil) {
+                print("[LivithDesignSystem] 폰트 등록 실패: \(fontName)")
             }
         }
     }
