@@ -27,10 +27,21 @@ let project = Project(
             product: .framework,
             bundleId: "\(baseBundleID)",
             deploymentTargets: deploymentTarget,
-            infoPlist: .default,
+            infoPlist: .extendingDefault(
+                with: [
+                    "UIAppFonts": [
+                        "NotoSansKR-Bold.ttf",
+                        "NotoSansKR-Medium.ttf",
+                        "NotoSansKR-Regular.ttf",
+                        "NotoSansKR-SemiBold.ttf"
+                    ]
+                ]
+            ),
             sources: ["LivithDesignSystem/Sources/**"],
             resources: ["LivithDesignSystem/Resources/**"],
-            dependencies: []
+            dependencies: [
+                .external(name: "Kingfisher")
+            ]
         ),
 
         // MARK: - LivithStorybook App
