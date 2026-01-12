@@ -17,6 +17,13 @@ if [ -z "$CURRENT_VERSION" ]; then
     exit 1
 fi
 
+# 버전 형식 검증 (X.Y.Z)
+if ! [[ "$CURRENT_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+    echo "❌ 버전 형식이 올바르지 않습니다: $CURRENT_VERSION"
+    echo "   예상 형식: X.Y.Z (예: 1.0.0)"
+    exit 1
+fi
+
 echo "📦 LivithDesignSystem 버전 업데이트"
 echo "   현재 버전: $CURRENT_VERSION"
 

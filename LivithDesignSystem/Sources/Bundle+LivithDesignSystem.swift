@@ -31,6 +31,11 @@ public extension Bundle {
             }
         }
 
+        // 예상된 리소스 번들을 찾지 못한 경우: 디버그 빌드에서는 경고를 남겨 설정 문제를 조기에 발견할 수 있도록 한다.
+        #if DEBUG
+        print("[LivithDesignSystem] 경고: 리소스 번들 '\(bundleName).bundle'을 찾을 수 없습니다. Bundle(for: BundleFinder.self)로 폴백합니다.")
+        #endif
+
         // 프레임워크 빌드 시 해당 클래스를 포함하는 번들로 폴백
         return Bundle(for: BundleFinder.self)
     }()
