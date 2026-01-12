@@ -93,9 +93,13 @@ public extension Font {
         let bundle = Bundle.livithDesignSystem
 
         for fontName in fontNames {
-            guard let url = bundle.url(forResource: fontName, withExtension: "ttf"),
-                  CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil) else {
+            guard let url = bundle.url(forResource: fontName, withExtension: "ttf") else {
+                print("[LivithDesignSystem] 폰트 파일을 찾을 수 없습니다: \(fontName).ttf")
                 continue
+            }
+
+            if !CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil) {
+                print("[LivithDesignSystem] 폰트 등록 실패: \(fontName)")
             }
         }
     }
