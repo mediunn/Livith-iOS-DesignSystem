@@ -20,7 +20,7 @@ public extension Color {
         case yellow30 = "Yellow30"
         case yellow60 = "Yellow60"
         case caution100 = "Caution100"
-        case translation = "Transition"
+        case translation = "Translation"
         case original = "Original"
 
         public var color: Color {
