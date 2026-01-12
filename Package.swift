@@ -19,10 +19,13 @@ let package = Package(
             targets: ["LivithDesignSystem"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/onevcat/Kingfisher.git", from: "8.0.0"),
+    ],
     targets: [
         .target(
             name: "LivithDesignSystem",
-            dependencies: [],
+            dependencies: ["Kingfisher"],
             path: "LivithDesignSystem/Sources",
             resources: [
                 .process("../Resources")

@@ -9,39 +9,22 @@
 import SwiftUI
 
 public extension Color {
-    enum LivithColor {
-        case black100, black90, black80, black50, black30, black5, white100
-        case yellow30, yellow60
-        case caution100
-        case translation, original
+    enum LivithColor: String {
+        case black100 = "Black100"
+        case black90 = "Black90"
+        case black80 = "Black80"
+        case black50 = "Black50"
+        case black30 = "Black30"
+        case black5 = "Black5"
+        case white100 = "White100"
+        case yellow30 = "Yellow30"
+        case yellow60 = "Yellow60"
+        case caution100 = "Caution100"
+        case translation = "Transition"
+        case original = "Original"
 
         public var color: Color {
-            switch self {
-            case .black100:
-                Color(LivithDesignSystemAsset.ColorAssets.black100.color)
-            case .black90:
-                Color(LivithDesignSystemAsset.ColorAssets.black90.color)
-            case .black80:
-                Color(LivithDesignSystemAsset.ColorAssets.black80.color)
-            case .black50:
-                Color(LivithDesignSystemAsset.ColorAssets.black50.color)
-            case .black30:
-                Color(LivithDesignSystemAsset.ColorAssets.black30.color)
-            case .black5:
-                Color(LivithDesignSystemAsset.ColorAssets.black5.color)
-            case .white100:
-                Color(LivithDesignSystemAsset.ColorAssets.white100.color)
-            case .yellow30:
-                Color(LivithDesignSystemAsset.ColorAssets.yellow30.color)
-            case .yellow60:
-                Color(LivithDesignSystemAsset.ColorAssets.yellow60.color)
-            case .caution100:
-                Color(LivithDesignSystemAsset.ColorAssets.caution100.color)
-            case .translation:
-                Color(LivithDesignSystemAsset.ColorAssets.transition.color)
-            case .original:
-                Color(LivithDesignSystemAsset.ColorAssets.original.color)
-            }
+            Color(rawValue, bundle: .livithDesignSystem)
         }
     }
 

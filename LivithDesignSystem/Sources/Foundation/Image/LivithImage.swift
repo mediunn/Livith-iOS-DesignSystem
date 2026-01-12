@@ -9,39 +9,20 @@
 import SwiftUI
 
 public extension Image {
-    enum LivithImage {
-        case concertCardEmpty
-        case instagram
-        case livithLogo, livithEmpty
-        case splash, feedback
-        case polygon
-        case welcome
-        case interestConcertComplete
-        case youtubeEmpty
+    enum LivithImage: String {
+        case concertCardEmpty = "image_concert_card_empty"
+        case instagram = "image_instagram"
+        case livithLogo = "image_livith_logo"
+        case livithEmpty = "image_livith_empty"
+        case splash = "image_splash"
+        case feedback = "btn_feedback"
+        case polygon = "image_polygon"
+        case welcome = "image_welcome"
+        case interestConcertComplete = "image_interest_concert_complete"
+        case youtubeEmpty = "image_youtube_empty"
 
         public var image: Image {
-            switch self {
-            case .concertCardEmpty:
-                LivithDesignSystemAsset.ImageAssets.imageConcertCardEmpty.swiftUIImage
-            case .instagram:
-                LivithDesignSystemAsset.ImageAssets.imageInstagram.swiftUIImage
-            case .livithLogo:
-                LivithDesignSystemAsset.ImageAssets.imageLivithLogo.swiftUIImage
-            case .livithEmpty:
-                LivithDesignSystemAsset.ImageAssets.imageLivithEmpty.swiftUIImage
-            case .splash:
-                LivithDesignSystemAsset.ImageAssets.imageSplash.swiftUIImage
-            case .feedback:
-                LivithDesignSystemAsset.ImageAssets.btnFeedback.swiftUIImage
-            case .polygon:
-                LivithDesignSystemAsset.ImageAssets.imagePolygon.swiftUIImage
-            case .welcome:
-                LivithDesignSystemAsset.ImageAssets.imageWelcome.swiftUIImage
-            case .interestConcertComplete:
-                LivithDesignSystemAsset.ImageAssets.imageInterestConcertComplete.swiftUIImage
-            case .youtubeEmpty:
-                LivithDesignSystemAsset.ImageAssets.imageYoutubeEmpty.swiftUIImage
-            }
+            Image(rawValue, bundle: .livithDesignSystem)
         }
     }
 
