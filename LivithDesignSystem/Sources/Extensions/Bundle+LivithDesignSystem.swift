@@ -16,11 +16,11 @@ public extension Bundle {
         let bundleName = "LivithDesignSystem_LivithDesignSystem"
 
         let candidates = [
-            // Bundle should be present here when the package is linked into an App.
+            // 패키지가 앱에 연결되어 있을 때 번들 위치
             Bundle.main.resourceURL,
-            // Bundle should be present here when the package is linked into a framework.
+            // 패키지가 프레임워크에 연결되어 있을 때 번들 위치
             Bundle(for: BundleFinder.self).resourceURL,
-            // For command-line tools.
+            // 커맨드라인 도구용 번들 위치
             Bundle.main.bundleURL,
         ]
 
@@ -31,7 +31,7 @@ public extension Bundle {
             }
         }
 
-        // Fallback to the bundle containing this class (for framework builds)
+        // 프레임워크 빌드 시 해당 클래스를 포함하는 번들로 폴백
         return Bundle(for: BundleFinder.self)
     }()
 }
