@@ -44,22 +44,30 @@ public struct LivithListItem: View {
     // MARK: - Body
 
     public var body: some View {
-        Button {
-            action?()
-        } label: {
-            HStack {
-                Text(title)
-                    .notosans(.body2Medium)
-                    .foregroundStyle(Color.livithColor(.black30))
-
-                Spacer()
-
-                trailingView
+        if let action = action {
+            Button {
+                action()
+            } label: {
+                contentView
             }
-            .padding(.vertical, 10)
-            .padding(.horizontal, 16)
+            .buttonStyle(.plain)
+        } else {
+            contentView
         }
-        .buttonStyle(.plain)
+    }
+
+    private var contentView: some View {
+        HStack {
+            Text(title)
+                .notosans(.body2Medium)
+                .foregroundStyle(Color.livithColor(.black30))
+
+            Spacer()
+
+            trailingView
+        }
+        .padding(.vertical, 10)
+        .padding(.horizontal, 16)
     }
 }
 

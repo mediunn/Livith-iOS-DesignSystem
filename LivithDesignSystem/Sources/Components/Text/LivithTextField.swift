@@ -262,10 +262,7 @@ private extension LivithTextField {
         .padding(.vertical, 12)
         .focused($fieldFocused)
         .onChange(of: text) { oldValue, newValue in
-            let lineCount = newValue.components(separatedBy: "\n").count
-            if lineCount > 15 {
-                text = oldValue
-            } else if let maxLength = type.maxLength, newValue.count > maxLength {
+            if let maxLength = type.maxLength, newValue.count > maxLength {
                 text = String(newValue.prefix(maxLength))
             }
             onChange?()

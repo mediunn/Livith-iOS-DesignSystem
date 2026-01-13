@@ -90,7 +90,7 @@ public struct LivithChip: View {
             .notosans(.caption1Bold)
             .foregroundStyle(style.textColor)
             .padding(.horizontal, style.horizontalPadding)
-            .padding(.vertical, style.verticalPadding)
+            .frame(height: 30)
             .background(style.backgroundColor)
             .clipShape(RoundedRectangle(cornerRadius: style.cornerRadius))
             .overlay {

@@ -86,6 +86,7 @@ private extension LivithFilterButton {
         Image.livithIcon(style.icon)
             .renderingMode(.template)
             .tint(isSelected ? Color.livithColor(.black100) : Color.livithColor(.black30))
+            .offset(y: style == .genre ? 1 : 0)
     }
 
     var titleView: some View {
