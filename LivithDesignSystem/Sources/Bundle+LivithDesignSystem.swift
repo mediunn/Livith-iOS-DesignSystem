@@ -13,14 +13,21 @@ private class BundleFinder {}
 public extension Bundle {
     /// LivithDesignSystem 리소스 번들
     static let livithDesignSystem: Bundle = {
+        // Tuist/Xcode 프레임워크 빌드: 리소스가 프레임워크 번들에 직접 포함됨
+        let frameworkBundle = Bundle(for: BundleFinder.self)
+
+        // 프레임워크 번들에 리소스가 있는지 확인 (Tuist 빌드)
+        if frameworkBundle.url(forResource: "ColorAssets", withExtension: "xcassets") != nil ||
+           frameworkBundle.url(forResource: "NotoSansKR-Bold", withExtension: "ttf") != nil {
+            return frameworkBundle
+        }
+
+        // SPM 빌드: 별도의 리소스 번들 사용
         let bundleName = "LivithDesignSystem_LivithDesignSystem"
 
         let candidates = [
-            // 패키지가 앱에 연결되어 있을 때 번들 위치
             Bundle.main.resourceURL,
-            // 패키지가 프레임워크에 연결되어 있을 때 번들 위치
-            Bundle(for: BundleFinder.self).resourceURL,
-            // 커맨드라인 도구용 번들 위치
+            frameworkBundle.resourceURL,
             Bundle.main.bundleURL,
         ]
 
@@ -31,12 +38,7 @@ public extension Bundle {
             }
         }
 
-        // 예상된 리소스 번들을 찾지 못한 경우: 디버그 빌드에서는 경고를 남겨 설정 문제를 조기에 발견할 수 있도록 한다.
-        #if DEBUG
-        print("[LivithDesignSystem] 경고: 리소스 번들 '\(bundleName).bundle'을 찾을 수 없습니다. Bundle(for: BundleFinder.self)로 폴백합니다.")
-        #endif
-
         // 프레임워크 빌드 시 해당 클래스를 포함하는 번들로 폴백
-        return Bundle(for: BundleFinder.self)
+        return frameworkBundle
     }()
 }
