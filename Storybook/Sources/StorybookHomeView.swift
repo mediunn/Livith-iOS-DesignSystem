@@ -1,4 +1,3 @@
-
 //
 //  StorybookHomeView.swift
 //  LivithStorybook
@@ -10,42 +9,63 @@ import SwiftUI
 import LivithDesignSystem
 
 struct StorybookHomeView: View {
+    private var lastModifiedDate: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        return formatter.string(from: Date())
+    }
+
+    private func navigationRow<Destination: View>(_ title: String, @ViewBuilder destination: () -> Destination) -> some View {
+        NavigationLink {
+            destination()
+        } label: {
+            Text(title)
+                .notosans(.body3Medium)
+                .foregroundStyle(Color.livithColor(.white100))
+        }
+    }
+
     var body: some View {
         NavigationStack {
             List {
-                Section("Foundation") {
-                    NavigationLink("Colors") {
-                        Text("Colors Catalog")
-                    }
-                    NavigationLink("Typography") {
-                        Text("Typography Catalog")
-                    }
-                    NavigationLink("Icons") {
-                        Text("Icons Catalog")
-                    }
+                Section {
+                    navigationRow("Colors") { ColorsView() }
+                    navigationRow("Typography") { TypographyView() }
+                    navigationRow("Icons") { IconsView() }
+                } header: {
+                    Text("Foundation")
+                        .notosans(.body2Semibold)
+                        .foregroundStyle(Color.livithColor(.white100))
+                        .textCase(.none)
                 }
 
-                Section("Components") {
-                    NavigationLink("Buttons") {
-                        Text("Buttons Catalog")
-                    }
-                    NavigationLink("TextFields") {
-                        Text("TextFields Catalog")
-                    }
-                    NavigationLink("Cards") {
-                        Text("Cards Catalog")
-                    }
+                Section {
+                    navigationRow("Buttons") { ButtonsView() }
+                    navigationRow("TextFields") { TextFieldsView() }
+                    navigationRow("Cards") { CardsView() }
+                    navigationRow("Chips") { ChipsView() }
+                    navigationRow("Modals") { ModalsView() }
+                    navigationRow("Toasts") { ToastsView() }
+                } header: {
+                    Text("Components")
+                        .notosans(.body2Semibold)
+                        .foregroundStyle(Color.livithColor(.white100))
+                        .textCase(.none)
+                }
+
+                Section {
+                    Text("Last Updated: \(lastModifiedDate)")
+                        .notosans(.caption1Regular)
+                        .foregroundStyle(Color.livithColor(.black50))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .listRowBackground(Color.clear)
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.livithColor(.black100))
             .navigationTitle("Livith Storybook")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Text("v\(LivithDesignSystem.version)")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
         }
+        .preferredColorScheme(.dark)
     }
 }
 
