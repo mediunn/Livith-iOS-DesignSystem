@@ -13,9 +13,6 @@ import SwiftUI
 public enum LivithButtonVariant {
     case primary
     case pink
-    case secondary
-    case danger
-    case dark
 
     var enabledBackground: Color {
         switch self {
@@ -23,12 +20,6 @@ public enum LivithButtonVariant {
             return .livithColor(.yellow30)
         case .pink:
             return .livithColor(.translation)
-        case .secondary:
-            return .livithColor(.black50)
-        case .danger:
-            return .livithColor(.black5)
-        case .dark:
-            return .livithColor(.black80)
         }
     }
 
@@ -38,81 +29,28 @@ public enum LivithButtonVariant {
             return .livithColor(.yellow60)
         case .pink:
             return .livithColor(.translation).opacity(0.8)
-        case .secondary, .dark:
-            return .livithColor(.black80)
-        case .danger:
-            return .livithColor(.black5).opacity(0.8)
         }
     }
 
     var disabledBackground: Color {
-        switch self {
-        case .primary, .pink:
-            return .livithColor(.black50)
-        case .secondary, .dark:
-            return .livithColor(.black80)
-        case .danger:
-            return .livithColor(.black5)
-        }
+        return .livithColor(.black50)
     }
 
     var enabledForeground: Color {
-        switch self {
-        case .primary, .pink:
-            return .livithColor(.black100)
-        case .secondary:
-            return .livithColor(.white100)
-        case .danger:
-            return .livithColor(.caution100)
-        case .dark:
-            return .livithColor(.white100)
-        }
+        return .livithColor(.black100)
     }
 
     var disabledForeground: Color {
-        switch self {
-        case .primary, .pink:
-            return .livithColor(.black30)
-        case .secondary, .dark:
-            return .livithColor(.black50)
-        case .danger:
-            return .livithColor(.black50)
-        }
+        return .livithColor(.black30)
     }
 }
 
-// MARK: - Button Size
+// MARK: - Button Constants
 
-public enum LivithButtonSize {
-    case medium
-    case large
-
-    var height: CGFloat {
-        switch self {
-        case .medium:
-            return 52
-        case .large:
-            return 56
-        }
-    }
-
-    var font: Font.Notosans {
-        switch self {
-        case .medium:
-            return .body3Semibold
-        case .large:
-            return .body2Medium
-        }
-    }
-
-    var cornerRadius: CGFloat {
-        switch self {
-        case .medium:
-            return 6
-        case .large:
-            return 8
-        }
-    }
+private enum LivithButtonConstants {
+    static let height: CGFloat = 52
+    static let font: Font.Notosans = .body3Semibold
+    static let cornerRadius: CGFloat = 6
 }
 
 // MARK: - LivithButton
@@ -123,7 +61,6 @@ public struct LivithButton: View {
 
     private let title: String
     private let variant: LivithButtonVariant
-    private let size: LivithButtonSize
     private let isFullWidth: Bool
     private let isLoading: Bool
     private let cornerRadius: CGFloat?
@@ -132,7 +69,7 @@ public struct LivithButton: View {
     @Environment(\.isEnabled) private var isEnabled
 
     private var resolvedCornerRadius: CGFloat {
-        cornerRadius ?? size.cornerRadius
+        cornerRadius ?? LivithButtonConstants.cornerRadius
     }
 
     // MARK: - Initializer
@@ -140,7 +77,6 @@ public struct LivithButton: View {
     public init(
         _ title: String,
         variant: LivithButtonVariant = .primary,
-        size: LivithButtonSize = .medium,
         isFullWidth: Bool = true,
         isLoading: Bool = false,
         cornerRadius: CGFloat? = nil,
@@ -148,7 +84,6 @@ public struct LivithButton: View {
     ) {
         self.title = title
         self.variant = variant
-        self.size = size
         self.isFullWidth = isFullWidth
         self.isLoading = isLoading
         self.cornerRadius = cornerRadius
@@ -161,7 +96,7 @@ public struct LivithButton: View {
         Button(action: action) {
             HStack(spacing: 8) {
                 Text(title)
-                    .notosans(size.font)
+                    .notosans(LivithButtonConstants.font)
                     .foregroundStyle(isEnabled ? variant.enabledForeground : variant.disabledForeground)
 
                 if isLoading {
@@ -170,7 +105,7 @@ public struct LivithButton: View {
                 }
             }
             .frame(maxWidth: isFullWidth ? .infinity : nil)
-            .frame(height: size.height)
+            .frame(height: LivithButtonConstants.height)
         }
         .buttonStyle(LivithButtonStyle(variant: variant, cornerRadius: resolvedCornerRadius))
     }
@@ -239,55 +174,18 @@ private struct LivithButtonStyle: ButtonStyle {
     }
 }
 
-#Preview("Secondary Button") {
-    ZStack {
-        Color.livithColor(.black100)
-            .ignoresSafeArea()
-
-        VStack(spacing: 16) {
-            LivithButton("취소할래요", variant: .secondary) {
-                print("Secondary tapped")
-            }
-
-            LivithButton("초기화", variant: .secondary) {
-                print("Reset tapped")
-            }
-            .disabled(true)
-        }
-        .padding(.horizontal, 16)
-    }
-}
-
-#Preview("Large Buttons") {
-    ZStack {
-        Color.livithColor(.black100)
-            .ignoresSafeArea()
-
-        VStack(spacing: 16) {
-            LivithButton("가입하기", variant: .primary, size: .large) {
-                print("Large primary tapped")
-            }
-
-            LivithButton("확인했어요", variant: .pink, size: .large) {
-                print("Large pink tapped")
-            }
-        }
-        .padding(.horizontal, 16)
-    }
-}
-
 #Preview("Button Pair") {
     ZStack {
         Color.livithColor(.black100)
             .ignoresSafeArea()
 
         HStack(spacing: 12) {
-            LivithButton("취소할래요", variant: .secondary) {
-                print("Cancel tapped")
+            LivithButton("설정하기", variant: .primary) {
+                print("Primary tapped")
             }
 
             LivithButton("탈퇴할래요", variant: .pink) {
-                print("Confirm tapped")
+                print("Pink tapped")
             }
         }
         .padding(.horizontal, 16)

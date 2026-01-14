@@ -166,7 +166,7 @@ private extension LivithDangerModal {
     }
 
     var confirmButton: some View {
-        LivithButton(confirmTitle, variant: .danger, cornerRadius: 8) {
+        LivithButton(confirmTitle, variant: .pink, cornerRadius: 8) {
             switch type {
             case .confirm(let onConfirm):
                 onConfirm()
@@ -178,7 +178,7 @@ private extension LivithDangerModal {
     }
 
     var cancelButton: some View {
-        LivithButton(cancelTitle, variant: .dark, cornerRadius: 8) {
+        LivithButton(cancelTitle, variant: .primary, cornerRadius: 8) {
             onCancel()
         }
     }
