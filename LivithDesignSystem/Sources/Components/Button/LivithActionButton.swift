@@ -58,13 +58,8 @@ public struct LivithActionButton: View {
             }
             .padding(.vertical, verticalPadding)
             .padding(.horizontal, horizontalPadding)
-            .background(Color.livithColor(.black100))
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-            .shadow(
-                color: .livithColor(.white100).opacity(0.3),
-                radius: 6
-            )
         }
+        .buttonStyle(LivithActionButtonStyle())
     }
 }
 
@@ -107,6 +102,24 @@ private extension LivithActionButton {
         case .chevron: return 12
         case .plus: return 10
         }
+    }
+}
+
+// MARK: - Style
+
+private struct LivithActionButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(
+                configuration.isPressed
+                ? Color.livithColor(.black80)
+                : Color.livithColor(.black100)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .shadow(
+                color: .livithColor(.white100).opacity(0.3),
+                radius: 6
+            )
     }
 }
 
