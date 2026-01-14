@@ -1,3 +1,3 @@
 import ProjectDescription
 
-let tuist = Tuist(fullHandle: "kynhun20/Livith-DesignSystem", project: .tuist())
+let tuist = Tuist(project: .tuist())
