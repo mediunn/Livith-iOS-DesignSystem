@@ -9,13 +9,13 @@ import SwiftUI
 import LivithDesignSystem
 
 extension LivithToastType: CaseIterable, CustomStringConvertible {
-    public static var allCases: [LivithToastType] = [.success, .failure, .deletionSuccess]
+    public static var allCases: [LivithToastType] = [.success, .failure]
 
     public var description: String {
         switch self {
         case .success: return "success"
         case .failure: return "failure"
-        case .deletionSuccess: return "deletionSuccess"
+
         }
     }
 }
