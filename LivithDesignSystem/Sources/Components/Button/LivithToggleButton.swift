@@ -66,7 +66,7 @@ public struct LivithToggleButton: View {
             Text("\(title) \(isOn ? "ON" : "OFF")")
                 .notosans(.body4Semibold)
                 .foregroundStyle(textColor)
-                .padding(.horizontal, 12)
+                .frame(width: 72)
                 .padding(.vertical, 5)
                 .background(backgroundColor)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
