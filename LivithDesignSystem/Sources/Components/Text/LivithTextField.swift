@@ -260,6 +260,7 @@ private extension LivithTextField {
         .lineLimit(1...4)
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
+        .frame(minHeight: 41)
         .focused($fieldFocused)
         .onChange(of: text) { oldValue, newValue in
             if let maxLength = type.maxLength, newValue.count > maxLength {
