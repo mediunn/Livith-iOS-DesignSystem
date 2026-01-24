@@ -14,7 +14,5 @@ import PackageDescription
 
 let package = Package(
     name: "Livith-DesignSystem",
-    dependencies: [
-        .package(url: "https://github.com/onevcat/Kingfisher.git", from: "8.0.0"),
-    ]
+    dependencies: []
 )
